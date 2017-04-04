@@ -1,0 +1,38 @@
+#wrapper {
+	margin-right: auto;
+	margin-left: auto;
+	
+	width: 900px;
+	background-color: red;
+	
+}
+h2 {
+	background-color: #ffffff;
+	color: grey;
+	padding: 5px 5px 5px 20px;
+	margin: 0;
+	
+	
+}
+body { 
+	
+	font-family: Verdana, 'Lucida Sans Unicode', sans-serif;
+	background-color: grey;
+
+ }
+
+#player {
+	background-color: black;
+	color: white;
+	padding: 20px;
+	
+	
+}
+
+
+h1 {
+	color: white;
+	padding: 10px 20px 10px 20px;
+	text-align: center;
+	margin: 0;
+}
