@@ -3,45 +3,47 @@
 
 
 
-// --- Funktionen SSS --------------------------------------------------------------------------
-
+// Variablen ---
 var nutzerAntwort = new Array();
 var beantwortet = 0;
 
+
+// --- Funktionen  --------------------------------------------------------------------------
+
+// Render Quiz - holt die Fragen mittels Radiobuttons ab ---
 function renderQuiz() {
   for(i=0;i<fragen.length;i++) {
     document.writeln('<p class="question">' + fragen[i] + ' <span id="result_' + i + '"><img src="blank.gif" style="border:0" alt="" /></span></p>');
     for(j=0;j<auswahl[i].length;j++) {
-      document.writeln('<input type="radio" name="answer_' + i + '" value="' + auswahl[i][j] + '" id="answer_' + i + '_' + j + '" class="question_' + i + '" onclick="sendeAntwort(' + i + ', this, \'question_' + i + '\', \'label_' + i + '_' + j + '\')" /><label id="label_' + i + '_' + j + '" for="answer_' + i + '_' + j + '"> ' + auswahl[i][j] + '</label><br />');
+      document.writeln('<input type="radio" name="antwort' + i + '" value="' + auswahl[i][j] + '" id="antwort' + i + '_' + j + '" class="question_' + i + '" onclick="sendeAntwort(' + i + ', this, \'question_' + i + '\', \'label_' + i + '_' + j + '\')" /><label id="label_' + i + '_' + j + '" for="antwort' + i + '_' + j + '"> ' + auswahl[i][j] + '</label><br>');
     }
   }
 
 }
+// Neues Spiel starten ---
 function quizNeustarten(zeigePassende) {
   if(zeigePassende)
     if(!confirm("Bist Du Dir sicher dass Du neu anfangen willst ?"))
       return false;
   document.location = document.location;
 }
+
+// Eingabe übergeben und Frage ausgrauen ---
 function sendeAntwort(frageID, obj, classId, labelId) {
   nutzerAntwort[frageID] = obj.value;
   document.getElementById(labelId).style.fontWeight = "bold";
   frageAbschalten(classId);
-  zeigeErgebniss(frageID);
   beantwortet++;
 }
-function zeigeErgebniss(frageID) {
-  if(antworten[frageID] == nutzerAntwort[frageID]) {
-    document.getElementById('result_' + frageID).innerHTML = '<img src="richtig.gif" style="border:0" alt="richtig!" />';
-  } else {
-    document.getElementById('result_' + frageID).innerHTML = '<img src="falsch.gif" style="border:0" alt="falsch!" />';
-  }
-}
+
+// Benachrichtigung wenn noch nicht alle Fragen beantwortet wurden
 function showScore() {
   if(beantwortet != antworten.length) {
     alert("Du hast noch nicht alle Fragen beantwortet!");
     return false;
   }
+  
+  //  Fragt Anzahl der Fragen ab
   laengeFragen = antworten.length;
   richtig = 0;
   falsch = 0;
@@ -51,26 +53,13 @@ function showScore() {
     else
       falsch++;
   }
-  pc = Math.round((richtig / laengeFragen) * 100);
+  // Gibt das Ergebniss aus
+  qn = Math.round((richtig / laengeFragen) * 100);
   alertMsg = "Du hast " + richtig + " von " + laengeFragen + "Fragen richtig.\n\n";
-  alertMsg += "Du hast " + pc + "% der Fragen richtig beantwortet! \n\n";
-  if(pc == 100)
-    alertMsg += reaktion[0];
-  else if(pc >= 90)
-    alertMsg += reaktion[1];
-  else if(pc >= 70)
-    alertMsg += reaktion[2];
-  else if(pc > 50)
-    alertMsg += reaktion[3];
-  else if(pc >= 40)
-    alertMsg += reaktion[4];
-  else if(pc >= 20)
-    alertMsg += reaktion[5];
-  else if(pc >= 10)
-    alertMsg += reaktion[6];
-  else
-    alertMsg += reaktion[7];
-  if(pc < 100) {
+  alertMsg += "Du hast " + qn + "% der Fragen richtig beantwortet! \n\n";
+  
+ // Neustarten
+  if(qn < 100) {
     if(confirm(alertMsg))
       quizNeustarten(false);
     else
@@ -148,16 +137,6 @@ auswahl[5][2] = "strings, numbers, Booleans, und nulls";
 auswahl[5][3] = "strings, numbers, Booleans, und zeros";
 antworten[5] = auswahl[5][2];
 
-// Reaktionen auf das Ergebniss
-reaktion[0] = "Super gemacht! Top Punktzahl!!";
-reaktion[1] = "Super! Versuchs nochmal um 100% zu erreichen!"
-reaktion[2] = "Gut gemacht. Das ist ein tolles Ergebniss. Kannst Du das besser?";
-reaktion[3] = "Schön. Du hast über 50% der Fragen richtig. Versuche es gleich nochmal ...";
-reaktion[4] = "Ein paar Antworten sind immerhin richtig. Das kannst Du aber besser!";
-reaktion[5] = "Das war aber nichts. Versuch es gleich noch mal.";
-reaktion[6] = "Das war ja wirklich schlecht. Da muss sich Deine Mutter aber für schämen";
-reaktion[7] = "Ach Du Scheisse! Bist Du sicher dass Du überhaupt lesen kannst?";
-
 
 fragen[6] = "7) Mit JavaScript kann man auch Windows 10 Apps programmieren?";
 auswahl[6] = new Array();
@@ -176,3 +155,4 @@ auswahl[8] = new Array();
 auswahl[8][0] = "Wahr";
 auswahl[8][1] = "Falsch";
 antworten[8] = auswahl[3][1];
+
