@@ -157,3 +157,22 @@ reaktion[4] = "Ein paar Antworten sind immerhin richtig. Das kannst Du aber bess
 reaktion[5] = "Das war aber nichts. Versuch es gleich noch mal.";
 reaktion[6] = "Das war ja wirklich schlecht. Da muss sich Deine Mutter aber für schämen";
 reaktion[7] = "Ach Du Scheisse! Bist Du sicher dass Du überhaupt lesen kannst?";
+
+
+fragen[6] = "7) Mit JavaScript kann man auch Windows 10 Apps programmieren?";
+auswahl[6] = new Array();
+auswahl[6][0] = "Wahr";
+auswahl[6][1] = "Falsch";
+antworten[6] = auswahl[3][0];
+
+fragen[7] = "8) Ist es möglich eine anonyme Funktion als Argument an eine weitere Funktion weiterzugeben?";
+auswahl[7] = new Array();
+auswahl[7][0] = "Wahr";
+auswahl[7][1] = "Falsch";
+antworten[7] = auswahl[3][0];
+
+fragen[8] = "9) Javascript ist eine weiterentwickelte Scriptsprache der Programmiersprache Java. ?";
+auswahl[8] = new Array();
+auswahl[8][0] = "Wahr";
+auswahl[8][1] = "Falsch";
+antworten[8] = auswahl[3][1];
