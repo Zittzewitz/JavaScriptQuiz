@@ -1,15 +1,10 @@
 // --- Nutzer Anmeldung ------------------------------------------------------------------------
 var username = prompt("Bitte geben Sie Ihren Benutzernamen ein.");
 
-
-
-
-
 // Ausgabefunktion
 function el(id){
 	return document.getElementById(id);
 }
-
 
 // Variablen ---
 var nutzerAntwort = new Array();
@@ -31,7 +26,7 @@ function renderQuiz() {
 // Neues Spiel starten ---
 function quizNeustarten(zeigePassende) {
   if(zeigePassende)
-    if(!confirm("Bist Du Dir sicher dass Du neu anfangen willst ?"))
+    if(!confirm("Hallo " + username + "\nBist Du Dir sicher dass Du neu anfangen willst ?"))
       return false;
   document.location = document.location;
 }
@@ -39,7 +34,7 @@ function quizNeustarten(zeigePassende) {
 // Eingabe übergeben und Frage ausgrauen ---
 function sendeAntwort(frageID, obj, classId, labelId) {
   nutzerAntwort[frageID] = obj.value;
-  document.getElementById(labelId).style.color = "red";
+  document.getElementById(labelId).style.color = "blue";
   frageAbschalten(classId);
   beantwortet++;
 }
@@ -62,7 +57,7 @@ function showScore() {
       falsch++;
   }
   
-  
+  // Gibt das Ergebnis aus
   qn = Math.round((richtig / laengeFragen) * 100);
   el("info").innerHTML = "<h2>Hallo: " + username + "</h2><p>Du hast " + richtig + " von " + laengeFragen + " Fragen richtig.</p>" +
 							"Du hast " + qn + "% der Fragen richtig beantwortet!";
@@ -84,11 +79,13 @@ function showScore() {
     alert(alertMsg);
   }
 }
+
+// Sorgt dafür, dass beantwortete Fragen nicht mehr selektierbar sind.
 function frageAbschalten(classId) {
-  var alltags=document.getElementsByTagName("*")
-  for (i=0; i<alltags.length; i++) {
-    if (alltags[i].className == classId) {
-      alltags[i].disabled = true;
+ var alltags=document.getElementsByTagName("*")
+ for (i=0; i<alltags.length; i++) {
+   if (alltags[i].className == classId) {
+     alltags[i].disabled = true;
     }
   }
 }
@@ -171,5 +168,4 @@ auswahl[8] = new Array();
 auswahl[8][0] = "Wahr";
 auswahl[8][1] = "Falsch";
 antworten[8] = auswahl[3][1];
-
 
