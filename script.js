@@ -1,6 +1,14 @@
-// --- Nutzer Datenbank ------------------------------------------------------------------------
+// --- Nutzer Anmeldung ------------------------------------------------------------------------
+var username = prompt("Bitte geben Sie Ihren Benutzernamen ein.");
 
 
+
+
+
+// Ausgabefunktion
+function el(id){
+	return document.getElementById(id);
+}
 
 
 // Variablen ---
@@ -13,7 +21,7 @@ var beantwortet = 0;
 // Render Quiz - holt die Fragen mittels Radiobuttons ab ---
 function renderQuiz() {
   for(i=0;i<fragen.length;i++) {
-    document.writeln('<p class="question">' + fragen[i] + ' <span id="result_' + i + '"><img src="blank.gif" style="border:0" alt="" /></span></p>');
+    document.writeln('<p class="question">' + fragen[i] + ' <span id="result_' + i + '"></span></p>');
     for(j=0;j<auswahl[i].length;j++) {
       document.writeln('<input type="radio" name="antwort' + i + '" value="' + auswahl[i][j] + '" id="antwort' + i + '_' + j + '" class="question_' + i + '" onclick="sendeAntwort(' + i + ', this, \'question_' + i + '\', \'label_' + i + '_' + j + '\')" /><label id="label_' + i + '_' + j + '" for="antwort' + i + '_' + j + '"> ' + auswahl[i][j] + '</label><br>');
     }
@@ -31,7 +39,7 @@ function quizNeustarten(zeigePassende) {
 // Eingabe übergeben und Frage ausgrauen ---
 function sendeAntwort(frageID, obj, classId, labelId) {
   nutzerAntwort[frageID] = obj.value;
-  document.getElementById(labelId).style.fontWeight = "bold";
+  document.getElementById(labelId).style.color = "red";
   frageAbschalten(classId);
   beantwortet++;
 }
@@ -53,10 +61,18 @@ function showScore() {
     else
       falsch++;
   }
-  // Gibt das Ergebniss aus
+  
+  
   qn = Math.round((richtig / laengeFragen) * 100);
-  alertMsg = "Du hast " + richtig + " von " + laengeFragen + "Fragen richtig.\n\n";
-  alertMsg += "Du hast " + qn + "% der Fragen richtig beantwortet! \n\n";
+  el("info").innerHTML = "<h2>Hallo: " + username + "</h2><p>Du hast " + richtig + " von " + laengeFragen + " Fragen richtig.</p>" +
+							"Du hast " + qn + "% der Fragen richtig beantwortet!";
+  
+  
+  
+  
+  
+  
+
   
  // Neustarten
   if(qn < 100) {
@@ -155,4 +171,5 @@ auswahl[8] = new Array();
 auswahl[8][0] = "Wahr";
 auswahl[8][1] = "Falsch";
 antworten[8] = auswahl[3][1];
+
 
